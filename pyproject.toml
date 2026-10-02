@@ -1,7 +1,7 @@
 [project]
 name = "nsga2"
 version = "0.1.0"
-description = "Add your description here"
+description = "My reproduction of NSGA-II."
 readme = "README.md"
 authors = [
     { name = "BruceZhang0808", email = "zhangyixiang0808@gmail.com" }
@@ -10,6 +10,8 @@ requires-python = ">=3.12, <3.13"
 dependencies = [
     "matplotlib>=3.11.2",
     "numpy>=2.5.3",
+    "pyyaml>=6.0.3",
+    "tqdm>=4.70.1",
 ]
 
 [project.scripts]

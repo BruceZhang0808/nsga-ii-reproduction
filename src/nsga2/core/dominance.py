@@ -1,40 +1,43 @@
-def dominate(p, q, objective_functions):
+import numpy as np
+from nsga2.core.individual import Individual
+
+
+def dominate(p: Individual, q: Individual) -> bool:
     """Return True if p dominates q else False"""
-    flag = False    # To mark if there exits one function s.t. f(p) < f(q)
-    for f in objective_functions:
-        if f(p) > f(q):
-            return False
-        if f(p) < f(q):
-            flag = True
-    return True if flag else False
+    if np.all(p.f <= q.f) and np.any(p.f < q.f):
+        return True 
+    return False
 
 
-def fast_non_dominated_sort(population):
-    N = len(population)
-    n, S = [-1 for _ in range(N)], [[] for _ in range(N)]
+def fast_nondominated_sort(pop: list[Individual]) -> list[list[Individual]]:
+    """Fast Nondominated Sorting Approach, returns all the Pareto-optimal fronts."""
+    N = len(pop)
+    n, S = [0 for _ in range(N)], [[] for _ in range(N)]
     first_front = []
-    for i in range(N):
-        for j in range(N):
-            if population[i] is population[j]:
+    for p in range(N):
+        for q in range(N):
+            if p == q:
                 continue
-            if dominate(population[i], population[j]):
-                S[i].append(j)
-            else:
-                n[i] += 1
-        if n[i] == 0:
-            first_front.append(i)
+            if dominate(pop[p], pop[q]):
+                S[p].append(q)
+            elif dominate(pop[q], pop[p]):
+                n[p] += 1
+        if n[p] == 0:
+            pop[p].rank = 0
+            first_front.append(p)
 
     fronts = [first_front]
     i = 0
     while fronts[i]:
         next_front = []
-        for p_index in fronts[i]:
-            for q_index in S[p_index]:
-                n[q_index] -= 1
-                if n[q_index] == 0:
-                    next_front.append(q_index)
+        for p in fronts[i]:
+            for q in S[p]:
+                n[q] -= 1
+                if n[q] == 0:
+                    pop[q].rank = i + 1
+                    next_front.append(q)
         i += 1
         fronts.append(next_front)
     fronts.pop()
 
-    return fronts
+    return [[pop[i] for i in front] for front in fronts]

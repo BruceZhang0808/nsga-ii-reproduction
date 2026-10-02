@@ -1,0 +1,24 @@
+# ==========================================
+# 1. 画布基础设置
+# ==========================================
+figure.dpi: 120
+savefig.dpi: 300
+figure.figsize: 8, 8
+
+# ==========================================
+# 2. 字体设置
+# ==========================================
+font.sans-serif: PingFang SC, Helvetica
+axes.unicode_minus: False
+mathtext.fontset: cm
+axes.labelsize: 14
+axes.titlesize: 16
+legend.fontsize: 15
+
+# ==========================================
+# 3. 坐标轴与网格
+# ==========================================
+axes.grid: False
+grid.linestyle: --
+grid.alpha: 0.4
+axes.linewidth: 1.0
