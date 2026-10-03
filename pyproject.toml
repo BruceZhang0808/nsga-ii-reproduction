@@ -14,8 +14,11 @@ dependencies = [
     "tqdm>=4.70.1",
 ]
 
+[dependency-groups]
+dev = ["ipykernel>=7.4.0"]
+
 [project.scripts]
-nsga2 = "nsga2:main"
+nsga2 = "nsga2.experiments.run_benchmark:main"
 
 [build-system]
 requires = ["uv_build>=0.12.19,<0.13.0"]
@@ -24,13 +27,3 @@ build-backend = "uv_build"
 [[tool.uv.index]]
 url = "https://mirrors.aliyun.com/pypi/simple"
 default = true
-
-[[tool.uv.index]]
-name = "pytorch-cn"
-url = "https://mirror.sjtu.edu.cn/pytorch-wheels/cu132"
-explicit = true
-
-[tool.uv.sources]
-torch = { index = "pytorch-cn", marker = "sys_platform == 'linux' or sys_platform == 'win32'" }
-torchvision = { index = "pytorch-cn", marker = "sys_platform == 'linux' or sys_platform == 'win32'" }
-torchaudio = { index = "pytorch-cn", marker = "sys_platform == 'linux' or sys_platform == 'win32'" }

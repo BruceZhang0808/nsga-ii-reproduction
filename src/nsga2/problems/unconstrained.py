@@ -195,12 +195,14 @@ class ZDT6(ZDT):
     """
 
     n_var = 10
+    xl = np.zeros(10)
+    xu = np.ones(10)
 
 
     def evaluate(self, x: np.ndarray) -> np.ndarray:
         f1 = 1.0 - np.exp(-4.0 * x[0]) * np.sin(6.0 * np.pi * x[0]) ** 6
         g = self._g(x)
-        return np.array([f1, self._h(f1, g)])
+        return np.array([f1, g * self._h(f1, g)])
 
     def _g(self, x: np.ndarray) -> float:
         return 1.0 + 9.0 * (np.sum(x[1:]) / (self.n_var - 1)) ** 0.25
@@ -209,6 +211,5 @@ class ZDT6(ZDT):
         return 1.0 - (f1 / g) ** 2
 
     def pareto_front(self, n_points: int) -> np.ndarray:
-        # g = 1 on the front (x_i = 0 for i >= 2), so f2 = 1 - f1^2
         f1 = np.linspace(0.280775, 1.0, n_points)
         return np.column_stack([f1, self._h(f1, 1.0)])

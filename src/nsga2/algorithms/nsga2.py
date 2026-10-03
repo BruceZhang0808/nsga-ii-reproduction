@@ -74,7 +74,7 @@ class NSGA2:
         pop = self.initialize_population()
         self.evaluate(pop)
 
-        for _ in trange(self.n_gen):
+        for _ in trange(self.n_gen, leave=False):
             pop = self.evolve(pop)
 
         return pop

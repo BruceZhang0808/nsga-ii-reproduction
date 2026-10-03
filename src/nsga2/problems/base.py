@@ -9,7 +9,7 @@ class Problem(ABC):
     xu: np.ndarray
 
     @abstractmethod
-    def evaluate(self, x: np.ndarray) -> np.ndarray: ...   # shape: (n_obj,)
+    def evaluate(self, x: np.ndarray) -> np.ndarray: ...   # Return shape: (n_obj,)
 
     def constraints(self, x: np.ndarray) -> np.ndarray:
         return np.empty(0)

@@ -1,18 +1,12 @@
 import numpy as np
 from nsga2.core.individual import Individual
-from nsga2.problems.base import Problem
 
 
 def bitwise_mutation():
     pass
 
 
-def polynomial_mutation(
-        eta_m: int, 
-        xl: np.ndarray,
-        xu: np.ndarray,
-        pm: float | None = None
-    ):
+def polynomial_mutation(eta_m: int, xl: np.ndarray, xu: np.ndarray, pm: float | None = None):
     """The mutation operator in place"""
     n_var = xl.size
     if pm is None:
@@ -31,5 +25,6 @@ def polynomial_mutation(
                                (2*u + (1-2*u)*(1-delta1)**(eta_m+1))**(1/(eta_m+1)) - 1,
                                1 - (2*(1-u) + (2*u-1)*(1-delta2)**(eta_m+1))**(1/(eta_m+1)))
         ind.x[mask] += delta_tilde[mask] * (xu - xl)[mask]
+        np.clip(ind.x, xl, xu, out=ind.x) 
 
     return mutation

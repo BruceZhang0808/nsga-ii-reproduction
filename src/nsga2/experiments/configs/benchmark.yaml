@@ -1,0 +1,9 @@
+nsga2_real:
+  pop_size: 100
+  n_gen: 250
+  eta_c: 20
+  eta_m: 20
+  pc: 0.9          # 交叉的概率
+  n_ref: 500       # 用于计算指标gamma的前沿面上的参考点数量
+  n_runs: 10       # 每个problem的独立重复实验次数
+  figure_seed: 0   # 当seed为多少时保存当次实验的可视化结果

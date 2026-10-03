@@ -8,7 +8,7 @@ figure.figsize: 8, 8
 # ==========================================
 # 2. 字体设置
 # ==========================================
-font.sans-serif: PingFang SC, Helvetica
+font.sans-serif: Helvetica, Arial, PingFang SC, Microsoft YaHei, Noto Sans CJK SC
 axes.unicode_minus: False
 mathtext.fontset: cm
 axes.labelsize: 14
